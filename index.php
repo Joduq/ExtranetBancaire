@@ -8,13 +8,18 @@
   <title>blog</title>
 </head>
 <body>
-<h1>Mon super blog!</h1>
-<p>Derniers billets du blog:</p>
+<h1>Le Groupement Banque Assurance Français - GBAF</h1>
+<p>Fédération représentant les 6 grands groupes français (BNP Paribas, BPCE, Crédit Agricole, Crédit Mutuel-CIC, Société Général, La Banque Postale) et tous les autres acteurs de la profession bancaire et 
+  des assureurs sur tous les axes de la réglementation financière française.
+</p>
+<h2>Les acteurs de la GBAF</h1>
+<p>les acteurs s'unissent et proposent les meilleurs produits bancaires et assurances pour les 80 millions de comptes présent sur le territoire français
+</p>
 <?php
 try
 {
 	// On se connecte à MySQL
-	$bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'root');
+	$bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
 }
 catch(Exception $e)
 {
@@ -26,20 +31,22 @@ catch(Exception $e)
 
 // On récupère tout le contenu de la table jeux_video
 // $reponse = $bdd->query('SELECT * FROM billets ORDER BY date_creation DESC LIMIT 5');
-$reponse = $bdd->query('SELECT titre, contenu, id, date_creation, DAY(date_creation) AS jour, MONTH(date_creation) AS mois,
- YEAR(date_creation) AS annee, HOUR(date_creation) AS heure, MINUTE(date_creation) AS minute, SECOND(date_creation) AS seconde FROM billets ORDER BY date_creation DESC LIMIT 5');
+$reponse = $bdd->query('SELECT * FROM acteurs ORDER BY id_acteur DESC');
 
 // On affiche chaque entrée une à une
 while ($donnees = $reponse->fetch())
 {
 ?>
 <div class="news">
+  <p>
+    <img src="logos/<?php echo htmlspecialchars($donnees['logo']); ?>" alt="logo acteur">
+  </p>
   <h3>
-    <?php echo htmlspecialchars($donnees['titre']);?> <em>le <?php echo $donnees['jour'];?>/<?php echo $donnees['mois'];?>/<?php echo $donnees['annee'];?> à <?php echo $donnees['heure'];?>h<?php echo $donnees['minute'];?>m<?php echo $donnees['seconde'];?>s</em>
+    <?php echo htmlspecialchars($donnees['description']);?>
+    <a href="<?php echo $donnees['lien'];?>"><?php echo $donnees['lien'];?></a>
   </h3>
   <p>
-    <?php echo nl2br(htmlspecialchars($donnees['contenu']));?><br/>
-    <button  onclick="commentaires.php?id=<?php echo $donnees['id']; ?>">Lire la suite</button>
+    <button  type="button"><a href="commentaires.php?id=<?php echo $donnees['id']; ?>">Lire la suite</a></button>
   </p>
 </div>
  
