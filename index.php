@@ -39,7 +39,7 @@ while ($donnees = $reponse->fetch())
   </h3>
   <p>
     <?php echo nl2br(htmlspecialchars($donnees['contenu']));?><br/>
-    <em><a href="commentaires.php?id=<?php echo $donnees['id']; ?>">Commentaires</a></em>
+    <button  onclick="commentaires.php?id=<?php echo $donnees['id']; ?>">Lire la suite</button>
   </p>
 </div>
  
