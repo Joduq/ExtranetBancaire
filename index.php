@@ -46,7 +46,7 @@ while ($donnees = $reponse->fetch())
     <a href="<?php echo $donnees['lien'];?>"><?php echo $donnees['lien'];?></a>
   </h3>
   <p>
-    <button  type="button"><a href="commentaires.php?id=<?php echo $donnees['id_acteur']; ?>">Lire la suite</a></button>
+    <button  type="button"><a href="acteurs.php?id=<?php echo $donnees['id_acteur']; ?>">Lire la suite</a></button>
   </p>
 </div>
  
