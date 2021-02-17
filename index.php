@@ -5,65 +5,66 @@ setcookie('pass_hash', '', time() + 365*24*3600, null, null, false, true); // On
 
 // Et SEULEMENT MAINTENANT, on peut commencer à écrire du code html
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>blog</title>
+  <title>connexion</title>
 </head>
 <body>
-<h1>Le Groupement Banque Assurance Français - GBAF</h1>
-<p>Fédération représentant les 6 grands groupes français (BNP Paribas, BPCE, Crédit Agricole, Crédit Mutuel-CIC, Société Général, La Banque Postale) et tous les autres acteurs de la profession bancaire et 
-  des assureurs sur tous les axes de la réglementation financière française.
-</p>
-<h2>Les acteurs de la GBAF</h1>
-<p>les acteurs s'unissent et proposent les meilleurs produits bancaires et assurances pour les 80 millions de comptes présent sur le territoire français
-</p>
-<?php
+
+<form action="connexion.php" method="post">
+    <p>
+    <label for="username">Username :</label> 
+    <input type="text" name="username" id="username" value="<?php echo $_POST['username'] ?>"/><br/>
+    <label for="password">mot de passe :</label>
+    <input type="password" name="password" id="password" value="<?php echo $_POST['password'] ?>"/><br/>
+    <input type="checkbox" name="connexion" id="connexion" /> <label for="connexion">connexion automatique</label><br />
+    <input type="submit" value="Se connecter"/>
+    </p>
+  </form>
+  <a href="">page d'accueil</a>
+
+  <?php
+$username = $_POST['username'] ;
 try
 {
-	// On se connecte à MySQL
-	$bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
+$bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch(Exception $e)
 {
-	// En cas d'erreur, on affiche un message et on arrête tout
         die('Erreur : '.$e->getMessage());
 }
+//  Récupération de l'utilisateur et de son pass hashé
+$req = $bdd->prepare('SELECT id_user, password FROM accounts WHERE username = :username');
+$req->execute(array(
+    'username' => $username));
+$resultat = $req->fetch();
 
-// Si tout va bien, on peut continuer
+// Comparaison du pass envoyé via le formulaire avec la base
+$isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
 
-// On récupère tout le contenu de la table jeux_video
-// $reponse = $bdd->query('SELECT * FROM billets ORDER BY date_creation DESC LIMIT 5');
-$reponse = $bdd->query('SELECT * FROM acteurs ORDER BY id_acteur DESC');
-
-// On affiche chaque entrée une à une
-while ($donnees = $reponse->fetch())
+if (!$resultat)
 {
-?>
-<div class="news">
-  <p>
-    <img src="logos/<?php echo htmlspecialchars($donnees['logo']); ?>" alt="logo acteur">
-  </p>
-  <h3>
-    <?php echo htmlspecialchars($donnees['description']);?>
-    <a href="<?php echo $donnees['lien'];?>"><?php echo $donnees['lien'];?></a>
-  </h3>
-  <p>
-    <button  type="button"><a href="acteurs.php?id=<?php echo $donnees['id_acteur']; ?>">Lire la suite</a></button>
-  </p>
-</div>
- 
-<?php
+    echo 'Mauvais identifiant ou mot de passe !';
 }
-
-$reponse->closeCursor(); // Termine le traitement de la requête
-
+else
+{
+    if ($isPasswordCorrect) {
+        $_SESSION['id_user'] = $resultat['id_user'];
+        $_SESSION['username'] = $username;
+        if ($_POST['connexion']){
+          $_COOKIE['password'] =  password_hash($resultat['password']);
+          $_COOKIE['username'] = $username;
+        }
+      header(location:acteurs.php)
+    }
+    else {
+        echo 'Mauvais identifiant ou mot de passe !';
+    }
+}
 ?>
-
 </body>
 </html>
