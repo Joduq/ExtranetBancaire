@@ -106,7 +106,7 @@ function add_to_bdd(){
   // header('Location: minichat.php');
 }
 
-if( confirm_password($_POST['password'],$_POST['confirpassword'])==TRUE && valid_username($_POST['username'])==TRUE){
+if( confirm_password($_POST['password'],$_POST['confirpassword'])==TRUE && valid_username($_POST['username'])==TRUE && $_POST['prenom'] && $_POST['nom'] && $_POST['question'] && $_POST['reponse']){
   add_to_bdd();
   print "yes";
 }else{
@@ -118,6 +118,23 @@ if( confirm_password($_POST['password'],$_POST['confirpassword'])==TRUE && valid
   {
     $array_of_errors[]="username non renseigné ou déjà utilisé";
   }
+  if(!$_POST['prenom'])
+  {
+    $array_of_errors[]="prenom non renseigné";
+  }
+  if(!$_POST['nom'])
+  {
+    $array_of_errors[]="nom non renseigné";
+  }
+  if(!$_POST['question'])
+  {
+    $array_of_errors[]="question secrete pour récupration du mot de passe non renseignée";
+  }
+  if(!$_POST['reponse'])
+  {
+    $array_of_errors[]="réponse à la question secrète non renseignée";
+  }
+  
   echo "<ul>";
   foreach ($array_of_errors as $value) {
     echo "<li>".$value."</li>";
