@@ -14,12 +14,13 @@ setcookie('pass_hash', '', time() + 365*24*3600, null, null, false, true); // On
   <title>connexion</title>
 </head>
 <body>
+
 <form action="connexion.php" method="post">
     <p>
-    <label for="pseudo">pseudo :</label> 
-    <input type="text" name="pseudo" id="pseudo" value="<?php echo $_POST['pseudo'] ?>"/><br/>
-    <label for="mdp">mot de passe :</label>
-    <input type="password" name="mdp" id="mdp" value="<?php echo $_POST['mdp'] ?>"/><br/>
+    <label for="username">Username :</label> 
+    <input type="text" name="username" id="username" value="<?php echo $_POST['username'] ?>"/><br/>
+    <label for="password">mot de passe :</label>
+    <input type="password" name="password" id="password" value="<?php echo $_POST['password'] ?>"/><br/>
     <input type="checkbox" name="connexion" id="connexion" /> <label for="connexion">connexion automatique</label><br />
     <input type="submit" value="Se connecter"/>
     </p>
@@ -27,23 +28,23 @@ setcookie('pass_hash', '', time() + 365*24*3600, null, null, false, true); // On
   <a href="">page d'accueil</a>
 
   <?php
-$pseudo = $_POST['pseudo'] ;
+$username = $_POST['username'] ;
 try
 {
-$bdd = new PDO('mysql:host=localhost;dbname=espace_membre;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+$bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 catch(Exception $e)
 {
         die('Erreur : '.$e->getMessage());
 }
 //  Récupération de l'utilisateur et de son pass hashé
-$req = $bdd->prepare('SELECT id, pass FROM membres WHERE pseudo = :pseudo');
+$req = $bdd->prepare('SELECT id_user, password FROM accounts WHERE username = :username');
 $req->execute(array(
-    'pseudo' => $pseudo));
+    'username' => $username));
 $resultat = $req->fetch();
 
 // Comparaison du pass envoyé via le formulaire avec la base
-$isPasswordCorrect = password_verify($_POST['mdp'], $resultat['pass']);
+$isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
 
 if (!$resultat)
 {
@@ -52,15 +53,12 @@ if (!$resultat)
 else
 {
     if ($isPasswordCorrect) {
-        $_SESSION['id'] = $resultat['id'];
-        $_SESSION['pseudo'] = $pseudo;
+        $_SESSION['id_user'] = $resultat['id_user'];
+        $_SESSION['username'] = $username;
         if ($_POST['connexion']){
-          $_COOKIE['pass_hash'] =  password_hash($resultat['pass']);
-          $_COOKIE['login'] = $pseudo;
+          $_COOKIE['password'] =  password_hash($resultat['password']);
+          $_COOKIE['username'] = $username;
         }
-        echo $_COOKIE['login'];
-        echo $_COOKIE['pass_hash'];
-        echo 'Vous êtes connecté !';
     }
     else {
         echo 'Mauvais identifiant ou mot de passe !';

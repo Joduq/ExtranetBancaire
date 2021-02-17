@@ -1,3 +1,11 @@
+<?php
+session_start();
+setcookie('login', '', time() + 365*24*3600, null, null, false, true); // On écrit un cookie
+setcookie('pass_hash', '', time() + 365*24*3600, null, null, false, true); // On écrit un autre cookie...
+
+// Et SEULEMENT MAINTENANT, on peut commencer à écrire du code html
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,5 +64,6 @@ while ($donnees = $reponse->fetch())
 $reponse->closeCursor(); // Termine le traitement de la requête
 
 ?>
+
 </body>
 </html>

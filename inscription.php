@@ -1,4 +1,6 @@
-<?PHP  session_start();?>
+<?php 
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,29 +12,35 @@
 <body>
   <form action="inscription.php" method="post">
     <p>
-    <label for="pseudo">pseudo :</label> 
-    <input type="text" name="pseudo" id="pseudo" value="<?php echo $_POST['pseudo'] ?>"/><br/>
-    <label for="mdp">mot de passe :</label>
-    <input type="password" name="mdp" id="mdp" value="<?php echo $_POST['mdp'] ?>"/><br/>
-    <label for="confirmdp">confirmation du mot de passe:</label>
-    <input type="password" name="confirmdp" id="confirmdp" value="<?php echo $_POST['confirmdp'] ?>"/><br/>
-    <label for="email">email</label>
-    <input type="text" name="email" id="email" value="<?php echo $_POST['email'] ?>"/><br/>
+    <label for="prenom">prénom :</label> 
+    <input type="text" name="prenom" id="prenom" value="<?php echo $_POST['prenom'] ?>"/><br/>
+    <label for="nom">nom :</label> 
+    <input type="text" name="nom" id="nom" value="<?php echo $_POST['nom'] ?>"/><br/>
+    <label for="username">username :</label> 
+    <input type="text" name="username" id="username" value="<?php echo $_POST['username'] ?>"/><br/>
+    <label for="password">mot de passe :</label>
+    <input type="password" name="password" id="password" value="<?php echo $_POST['password'] ?>"/><br/>
+    <label for="confirpassword">confirmation du mot de passe:</label>
+    <input type="password" name="confirpassword" id="confirpassword" value="<?php echo $_POST['confirpassword'] ?>"/><br/>
+    <label for="question">entrez votre question secrète :</label>
+    <textarea name="question" id="question">ex: Quel est le nom de votre animal de compagnie?</textarea><br/>
+    <label for="reponse">entrez la reponse à votre question secrète :</label>
+    <textarea name="reponse" id="reponse">ex: Sacha</textarea>  <br/>
     <input type="submit"/>
     </p>
   </form>
   <a href="connexion.php">déjà inscrit?</a>
 
 <?php 
-if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']))
+if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
 {
-    echo 'Bonjour ' . $_SESSION['pseudo'];
+    echo 'Bonjour ' . $_SESSION['username'];
 }
 
 
 //verification du mot de passe avec le mot de passe de confirmation
 
-function confirm_email($str_a, $str_b) {
+function confirm_password($str_a, $str_b) {
   if($str_a==$str_b && $str_a != NUll && $str_b != NULL){
     return TRUE;
   }else{
@@ -42,21 +50,21 @@ function confirm_email($str_a, $str_b) {
   }
 }
 
-// confirm_email($_POST['mdp'],$_POST['confirmdp']);
+// confirm_password($_POST['password'],$_POST['confirpassword']);
 
-//verification que le pseudo est bien unique et n existe pas dans la bdd
+// verification que le username est bien unique et n existe pas dans la bdd
 
-function valid_pseudo($str){
+function valid_username($str){
   try
   {
-  $bdd_a = new PDO('mysql:host=localhost;dbname=espace_membre;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  $bdd_a = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
   }
   catch(Exception $e)
   {
           die('Erreur : '.$e->getMessage());
   }
-  $req_a = $bdd_a->prepare('SELECT COUNT(*) FROM membres WHERE pseudo = :pseudo');
-  $req_a->execute(array('pseudo' =>$str)); //$_POST['pseudo']
+  $req_a = $bdd_a->prepare('SELECT COUNT(*) FROM accounts WHERE username = :username');
+  $req_a->execute(array('username' =>$str)); //$_POST['username']
   $count = $req_a->fetchColumn();
 
   if ($count < 1 && $str != null)
@@ -66,33 +74,18 @@ function valid_pseudo($str){
     return FALSE;
   }
 }
-// valid_pseudo($_POST['pseudo']);
 
-//verification que l'adresse mail est bien une adresse mail
-
-function valid_email($str) {
-  if(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $str))
-  {
-    return FALSE;
-    $array_of_errors[]="Adresse email invalide";
-    echo "adress apas ok";
-    var_dump($array_of_errors);
-
-  } else {
-    return TRUE;
-  }
-}
-// valid_email($_POST['email']);
 function add_to_bdd(){
   // Hachage du mot de passe
-  $pass_hache = password_hash($_POST['mdp'], PASSWORD_DEFAULT);
-  $pseudo = $_POST['pseudo'];
-  $email =$_POST['email'];
-  // $date = CURDATE();
-  // Connexion à la base de données
+  $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  $username = $_POST['username'];
+  $prenom = $_POST['prenom'];
+  $nom = $_POST['nom'];
+  $question = $_POST['question'];
+  $reponse = $_POST['reponse'];
   try
   {
-    $bdd = new PDO('mysql:host=localhost;dbname=espace_membre;charset=utf8', 'root', 'root');
+    $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
   }
   catch(Exception $e)
   {
@@ -100,35 +93,30 @@ function add_to_bdd(){
   }
 
   // Insertion
-  $req = $bdd->prepare('INSERT INTO membres(pseudo, pass, email, date_inscription) VALUES(:pseudo, :pass, :email, CURDATE())');
+  $req = $bdd->prepare('INSERT INTO accounts(nom, prenom, username, password, question, reponse) VALUES(:nom, :prenom, :username, :password, :question, :reponse)');
   $req->execute(array(
-      'pseudo' => $pseudo,
-      'pass' => $pass_hache,
-      'email' => $email));
+      'nom' => $nom,
+      'prenom' => $prenom,
+      'username' => $username,
+      'password' => $password_hash,
+      'question' => $question,
+      'reponse' => $reponse));
+
   // Redirection du visiteur vers la page du minichat
   // header('Location: minichat.php');
 }
 
-if( confirm_email($_POST['mdp'],$_POST['confirmdp'])==TRUE && valid_pseudo($_POST['pseudo'])==TRUE &&  valid_email($_POST['email'])==TRUE ){
+if( confirm_password($_POST['password'],$_POST['confirpassword'])==TRUE && valid_username($_POST['username'])==TRUE){
   add_to_bdd();
   print "yes";
-} elseif(confirm_email($_POST['mdp'] && NULL,$_POST['confirmdp'])==NULL && valid_pseudo($_POST['pseudo'])==NULL &&  valid_email($_POST['email'])==NULL)
-
-{
-
-
 }else{
-  if(confirm_email($_POST['mdp'],$_POST['confirmdp'])==FALSE )
+  if(confirm_password($_POST['password'],$_POST['confirpassword'])==FALSE )
   {
     $array_of_errors[]="Mot de passe non renseigné ou confirmation du mot de passe différents";
   }
-  if(valid_pseudo($_POST['pseudo'])==FALSE )
+  if(valid_username($_POST['username'])==FALSE )
   {
-    $array_of_errors[]="Pseudo non renseigné ou déjà utilisé";
-  }
-  if(valid_email($_POST['email'])==FALSE )
-  {
-    $array_of_errors[]="Adresse email invalide";
+    $array_of_errors[]="username non renseigné ou déjà utilisé";
   }
   echo "<ul>";
   foreach ($array_of_errors as $value) {
@@ -137,7 +125,6 @@ if( confirm_email($_POST['mdp'],$_POST['confirmdp'])==TRUE && valid_pseudo($_POS
   echo "</ul>";
 }
   
-// elseif($_POST['mdp']==NULL|| $_POST['confirmdp']==NULL|| $_POST['pseudo']==NULL || $_POST['email']== NULL)
 ?>
 </body>
 </html>
