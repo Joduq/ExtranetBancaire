@@ -15,10 +15,11 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   <?php
   if (isset($_GET['id_acteur'])){
   ?>
-    <form action="" method="post" >
+    <form action="commentaires.php" method="post" >
       <p>
         <label for="post">entrez votre commentaire :</label>
         <textarea name="post" id="post"></textarea>  <br/>
+        <input type="hidden" name="id_acteur" value="<?php echo $_GET['id_acteur'] ?>" />
         <input type="submit">
       </p>
     </form>
@@ -26,7 +27,10 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
 
 
     <?php
+    var_dump($_POST['post']);
 
+
+  } else {
     try
     {
       $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
@@ -37,12 +41,14 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
     }
 
 
-    $req = $bdd->prepare('INSERT INTO posts (id_user, id_acteur, post) VALUES(?, ?, ?)');
-    $req->execute(array($_SESSION['id_user'], $_GET['id_acteur'], $_POST['post']));
-
-    header("Location: acteur.php".'?id='.$_GET['id_acteur']);
-  } else {
-    header("location:acteurs.php");
+    // $req = $bdd->prepare('INSERT INTO posts (id_user, id_acteur, post) VALUES(?, ?, ?)');
+    // $req->execute(array($_SESSION['id_user'], $_POST['id_acteur'], $_POST['post']));
+    $req = $bdd->prepare('INSERT INTO posts(id_user,id_acteur,date_add, post) VALUES(:id_user, :id_acteur, CURRENT_TIMESTAMP(),:post)');
+    $req->execute(array(
+        'id_user' => $_SESSION['id_user'],
+        'id_acteur' => $_POST['id_acteur'],
+        'post' =>  $_POST['post']));
+    header("Location: acteur.php".'?id='.$_POST['id_acteur']);
     }
     ?>
   </body>
