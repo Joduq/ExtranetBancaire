@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
 {
   ?>
@@ -47,10 +48,20 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   }
   $reponse_a->closeCursor(); // Termine le traitement de la requête
   ?>
-
-  <h2>Commentaires</h2> <button>nouveau commentaire</button><a href="like">like</a><i class="far fa-thumbs-up"></i>
   <?php
+  $req_d = $bdd->prepare('SELECT COUNT(*) FROM votes WHERE id_acteur = :id_acteur AND votes > 0');
+  $req_d->execute(array('id_acteur' =>$_GET['id']));
+  $count = $req_d->fetchColumn();
+  ?>
 
+  <h2>Commentaires</h2> 
+  <p>
+    <?php echo($count);?> likes
+  </p>
+  <button>nouveau commentaire</button>
+
+  <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><i class="far fa-thumbs-up"></i></a>
+  <?php
 
   // Si tout va bien, on peut continuer
 

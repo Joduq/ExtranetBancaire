@@ -42,7 +42,7 @@ catch(Exception $e)
         die('Erreur : '.$e->getMessage());
 }
 //  Récupération de l'utilisateur et de son pass hashé
-$req = $bdd->prepare('SELECT id_user, password FROM accounts WHERE username = :username');
+$req = $bdd->prepare('SELECT id_user, password, prenom, nom FROM accounts WHERE username = :username');
 $req->execute(array(
     'username' => $username));
 $resultat = $req->fetch();
@@ -58,6 +58,8 @@ else
 {
     if ($isPasswordCorrect) {
         $_SESSION['id_user'] = $resultat['id_user'];
+        $_SESSION['prenom'] = $resultat['prenom'];
+        $_SESSION['nom'] = $resultat['nom'];
         $_SESSION['username'] = $username;
         // if ($_POST['connexion']){
           
