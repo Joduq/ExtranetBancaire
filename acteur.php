@@ -59,7 +59,7 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
     <?php echo($count);?> likes
   </p>
   <button>nouveau commentaire</button>
-
+  <a href="commentaires.php?id_acteur=<?php echo $_GET['id'];?>">commentaire</a>
   <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><i class="far fa-thumbs-up"></i></a>
   <?php
 
