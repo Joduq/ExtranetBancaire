@@ -1,7 +1,9 @@
 <?php
 session_start();
-setcookie('login', '', time() + 365*24*3600, null, null, false, true); // On écrit un cookie
-setcookie('pass_hash', '', time() + 365*24*3600, null, null, false, true); // On écrit un autre cookie...
+// if(!$_SESSION['connexion']){
+  // setcookie('username','', time() + 365*24*3600,'/','/tests/ExtranetBancaire/');
+  // setcookie('password','', time() + 365*24*3600);
+// }
 
 // Et SEULEMENT MAINTENANT, on peut commencer à écrire du code html
 ?>
@@ -15,7 +17,7 @@ setcookie('pass_hash', '', time() + 365*24*3600, null, null, false, true); // On
 </head>
 <body>
 
-<form action="connexion.php" method="post">
+<form action="" method="post">
     <p>
     <label for="username">Username :</label> 
     <input type="text" name="username" id="username" value="<?php echo $_POST['username'] ?>"/><br/>
@@ -28,7 +30,9 @@ setcookie('pass_hash', '', time() + 365*24*3600, null, null, false, true); // On
   <a href="">page d'accueil</a>
 
   <?php
-$username = $_POST['username'] ;
+
+$username = $_POST['username'];
+
 try
 {
 $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
@@ -55,11 +59,14 @@ else
     if ($isPasswordCorrect) {
         $_SESSION['id_user'] = $resultat['id_user'];
         $_SESSION['username'] = $username;
-        if ($_POST['connexion']){
-          $_COOKIE['password'] =  password_hash($resultat['password']);
-          $_COOKIE['username'] = $username;
-        }
-      header(location:acteurs.php)
+        // if ($_POST['connexion']){
+          
+        //   $_COOKIE['password'] = password_hash($resultat['password']);;
+        //   $_COOKIE['username'] = $username;
+
+        // }
+ 
+        header("location: acteurs.php");
     }
     else {
         echo 'Mauvais identifiant ou mot de passe !';
