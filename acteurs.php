@@ -24,9 +24,6 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   </p>
 
   <?php
-  echo 'hello';
-  echo($_COOKIE['username']);
-  echo'hello';
   try
   {
     // On se connecte à MySQL
