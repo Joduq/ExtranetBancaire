@@ -28,7 +28,7 @@ session_start();
     </p>
   </form>
   <a href="">page d'accueil</a>
-
+  <a href="oublie.php">mot de passe oublié?</a>
   <?php
 
 $username = $_POST['username'];

@@ -32,6 +32,7 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   {
 
   ?>
+  <a href="acteurs.php">retour à la page acteur</a>
   <div class="news">
     <p>
       <img src="logos/<?php echo htmlspecialchars($donnees_a['logo']); ?>" alt="logo acteur">
@@ -64,7 +65,6 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   <?php
 
   // Si tout va bien, on peut continuer
-
   // On récupère tout le contenu de la table jeux_video
   // $reponse = $bdd->query('SELECT * FROM billets ORDER BY date_creation DESC LIMIT 5');
   $reponse_b = $bdd->prepare("SELECT id_post, id_user, id_acteur, date_add,post, DAY(date_add) AS jour, MONTH(date_add) AS mois,

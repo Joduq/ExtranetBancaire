@@ -28,7 +28,18 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
 
     <?php
     var_dump($_POST['post']);
-
+  } elseif(!$_POST['post'] ){
+    ?>
+    <form action="commentaires.php" method="post" >
+      <p>
+        <label for="post">entrez votre commentaire :</label>
+        <textarea name="post" id="post"></textarea>  <br/>
+        <input type="hidden" name="id_acteur" value="<?php echo $_POST['id_acteur'] ?>" />
+        <input type="submit">
+      </p>
+    </form>
+    <?php
+      echo 'Veuillez renseigner le champs commentaire';
 
   } else {
     try
@@ -49,7 +60,7 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
         'id_acteur' => $_POST['id_acteur'],
         'post' =>  $_POST['post']));
     header("Location: acteur.php".'?id='.$_POST['id_acteur']);
-    }
+    } 
     ?>
   </body>
   </html>
