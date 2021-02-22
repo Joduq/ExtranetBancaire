@@ -8,13 +8,16 @@ session_start();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link href="css/all.css" rel="stylesheet">
   <title>blog</title>
 </head>
 <body>
 <?php
 if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
 {
+  
   ?>
+  <?php include("header.php"); ?>
   <h1>Le Groupement Banque Assurance Français - GBAF</h1>
   <p>Fédération représentant les 6 grands groupes français (BNP Paribas, BPCE, Crédit Agricole, Crédit Mutuel-CIC, Société Général, La Banque Postale) et tous les autres acteurs de la profession bancaire et 
     des assureurs sur tous les axes de la réglementation financière française.

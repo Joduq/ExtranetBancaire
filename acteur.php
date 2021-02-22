@@ -12,7 +12,7 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <link href="css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="css/all.css" rel="stylesheet">
     <title>commentaires blog</title>
   </head>
   <?php
