@@ -4,6 +4,28 @@ a {
 }
 
 .list-inline {
-  list-style: none !important;
+  list-style: none;
   padding-left: 0px;
+}
+
+.logo{
+  width: 20px;
+  height: 20px;
+}
+
+p{
+  color: blue;
+}
+
+h1{
+  font-size: 70px;
+}
+
+
+h2{
+  font-size: 70px;
+}
+
+h3{
+  font-size: 70px;
 }
