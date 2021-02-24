@@ -1,8 +1,8 @@
-
 <?php
 
 if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
 {
+
   try
   {
     // On se connecte à MySQL
