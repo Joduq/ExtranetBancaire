@@ -18,16 +18,18 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   while ($donnees_a = $reponse_a->fetch())
   {
   ?>
-<div class=header>
+  <header>
   <img class="logo" src="logos/GBAF.png" alt="logo de la GBAF">
   <p>Bienvenue <?php echo htmlspecialchars($donnees_a['prenom']);?> et <?php echo htmlspecialchars($donnees_a['nom']);?> ! </p>
-  <ul class="list-inline">
-    <li><a href="parametre.php">paramètre</a></li>
-    <li><a href="deconnexion.php">déconnexion</a></li>
-    <li><i class="far fa-user"></i></li>
-    <li><img src="logos/user-regular.svg" style="width:20px;height:20px" alt=""></li>
-  </ul>
-</div>
+  <div class="nav-right">
+    <img src="logos/user-regular.svg" class="logo-user" alt="user-logo">
+    <ul class="list-inline">
+      <li><a href="parametre.php">paramètre</a></li>
+      <li><a href="deconnexion.php">déconnexion</a></li>
+    </ul>
+  </div> 
+  </header>
+
 <?php
   }
 } else {

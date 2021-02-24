@@ -1,3 +1,40 @@
+*{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+
+header{
+    position: sticky;
+    position:-webkit-sticky;
+    top:0;
+    margin:auto;
+    padding:4vh;
+    background-color:antiquewhite;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+
+}
+
+.nav-right{
+  display:flex;
+  justify-content: space-between;
+}
+.container{
+ margin-top: 8.7vh;
+}
+
+.card{
+
+}
+.card-img{
+
+}
+
+
 a {
   text-decoration: none;
 
@@ -7,29 +44,38 @@ a {
   list-style: none;
   padding-left: 0px;
 }
+.list-inline > li {
+  padding-bottom: 10%;
+}
+
+
 
 .logo{
-  width: 20px;
-  height: 20px;
+  width: 65px;
+  height: 83px;
+}
+.logo-user{
+  width: 50px;
+  height: 63px;
 }
 
 p{
-  color: blue;
+  
 }
 
 h1{
-  font-size: 70px;
+
 }
 
 
 h2{
-  font-size: 70px;
+ 
 }
 
 h3{
-  font-size: 70px;
+
 }
 
 body{
-  background-color: blue;
+  
 }

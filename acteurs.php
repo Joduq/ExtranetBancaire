@@ -64,6 +64,7 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
 
   $reponse->closeCursor(); // Termine le traitement de la requête
   ?>
+  </div>
   </body>
   </html>
 <?php

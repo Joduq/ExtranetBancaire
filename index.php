@@ -16,7 +16,7 @@ session_start();
   <title>connexion</title>
 </head>
 <body>
-<?php include("header.php"); ?>
+
 
 <form action="" method="post">
     <p>
