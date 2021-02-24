@@ -59,6 +59,38 @@ function insert_into_accounts ($nom, $prenom, $username, $password_hash, $questi
         'question' => $question,
         'reponse' => $reponse));
 }
+function select_all_acteurs(){
+  try
+  {
+    // On se connecte à MySQL
+    $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
+  }
+  catch(Exception $e)
+  {
+    // En cas d'erreur, on affiche un message et on arrête tout
+          die('Erreur : '.$e->getMessage());
+  }
 
+  // Si tout va bien, on peut continuer
+
+  // On récupère tout le contenu de la table jeux_video
+  // $reponse = $bdd->query('SELECT * FROM billets ORDER BY date_creation DESC LIMIT 5');
+  return $reponse = $bdd->query('SELECT * FROM acteurs ORDER BY id_acteur DESC');
+}
+
+function select_one_acteur($id_acteur){
+  try
+  {
+    // On se connecte à MySQL
+    $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
+  }
+  catch(Exception $e)
+  {
+    // En cas d'erreur, on affiche un message et on arrête tout
+          die('Erreur : '.$e->getMessage());
+  }
+  $reponse_a = $bdd->prepare("SELECT * FROM acteurs WHERE id_acteur=?");
+  return $reponse_a->execute(array($id_acteur));
+}
 
 ?>

@@ -1,11 +1,6 @@
 <?php 
   session_start();
-  if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
-  {
-      echo 'Bonjour ' . $_SESSION['username'];
-  }
-  
-  
+ 
   //verification du mot de passe avec le mot de passe de confirmation
   
   function confirm_password($str_a, $str_b) {
@@ -31,50 +26,50 @@
   $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);   
   $question = $_POST['question'];
   $reponse = $_POST['reponse'];
-  
-  if( confirm_password($_POST['password'],$_POST['confirpassword'])==TRUE && $valid_username==TRUE && $_POST['prenom'] && $_POST['nom'] && $_POST['question'] && $_POST['reponse']){
-    insert_into_accounts($nom, $prenom, $username, $password_hash, $question, $reponse);
-    $resultat= accounts_table($username);
-    $_SESSION['id_user'] = $resultat['id_user'];
-    $_SESSION['prenom'] = $resultat['prenom'];
-    $_SESSION['nom'] = $resultat['nom'];
-    $_SESSION['username'] = $username;
-    header("location: acteurs.php");
+  if (!$_POST['username']){
+
   }else{
-    if(confirm_password($_POST['password'],$_POST['confirpassword'])==FALSE )
-    {
-      $array_of_errors[]="Mot de passe non renseigné ou confirmation du mot de passe différents";
+    if( confirm_password($_POST['password'],$_POST['confirpassword'])==TRUE && $valid_username==TRUE && $_POST['prenom'] && $_POST['nom'] && $_POST['question'] && $_POST['reponse']){
+      insert_into_accounts($nom, $prenom, $username, $password_hash, $question, $reponse);
+      $resultat= accounts_table($username);
+      $_SESSION['id_user'] = $resultat['id_user'];
+      $_SESSION['prenom'] = $resultat['prenom'];
+      $_SESSION['nom'] = $resultat['nom'];
+      $_SESSION['username'] = $username;
+      header("location: acteurs.php");
+    }else{
+      if(confirm_password($_POST['password'],$_POST['confirpassword'])==FALSE )
+      {
+        $array_of_errors[]="Mot de passe non renseigné ou confirmation du mot de passe différents";
+      }
+      if(valid_username($_POST['username'])==FALSE )
+      {
+        $array_of_errors[]="username non renseigné ou déjà utilisé";
+      }
+      if(!$_POST['prenom'])
+      {
+        $array_of_errors[]="prenom non renseigné";
+      }
+      if(!$_POST['nom'])
+      {
+        $array_of_errors[]="nom non renseigné";
+      }
+      if(!$_POST['question'])
+      {
+        $array_of_errors[]="question secrete pour récupration du mot de passe non renseignée";
+      }
+      if(!$_POST['reponse'])
+      {
+        $array_of_errors[]="réponse à la question secrète non renseignée";
+      }
+      
+      echo "<ul>";
+      foreach ($array_of_errors as $value) {
+        echo "<li>".$value."</li>";
+      }
+      echo "</ul>";
     }
-    if(valid_username($_POST['username'])==FALSE )
-    {
-      $array_of_errors[]="username non renseigné ou déjà utilisé";
-    }
-    if(!$_POST['prenom'])
-    {
-      $array_of_errors[]="prenom non renseigné";
-    }
-    if(!$_POST['nom'])
-    {
-      $array_of_errors[]="nom non renseigné";
-    }
-    if(!$_POST['question'])
-    {
-      $array_of_errors[]="question secrete pour récupration du mot de passe non renseignée";
-    }
-    if(!$_POST['reponse'])
-    {
-      $array_of_errors[]="réponse à la question secrète non renseignée";
-    }
-    
-    echo "<ul>";
-    foreach ($array_of_errors as $value) {
-      echo "<li>".$value."</li>";
-    }
-    echo "</ul>";
   }
-    
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

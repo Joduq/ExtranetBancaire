@@ -1,5 +1,13 @@
 <?php
 session_start();
+
+if (isset($_SESSION['id_user']) AND isset($_SESSION['username'])){
+
+}else{
+  header("location:index.php");
+}
+include('bdd_call.php');
+$reponse = select_all_acteurs();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,11 +18,6 @@ session_start();
   <title>blog</title>
 </head>
 <body>
-<?php
-if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
-{
-  
-  ?>
   <?php include("header.php"); ?>
   <h1>Le Groupement Banque Assurance Français - GBAF</h1>
   <p>Fédération représentant les 6 grands groupes français (BNP Paribas, BPCE, Crédit Agricole, Crédit Mutuel-CIC, Société Général, La Banque Postale) et tous les autres acteurs de la profession bancaire et 
@@ -25,24 +28,6 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   </p>
 
   <?php
-  try
-  {
-    // On se connecte à MySQL
-    $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
-  }
-  catch(Exception $e)
-  {
-    // En cas d'erreur, on affiche un message et on arrête tout
-          die('Erreur : '.$e->getMessage());
-  }
-
-  // Si tout va bien, on peut continuer
-
-  // On récupère tout le contenu de la table jeux_video
-  // $reponse = $bdd->query('SELECT * FROM billets ORDER BY date_creation DESC LIMIT 5');
-  $reponse = $bdd->query('SELECT * FROM acteurs ORDER BY id_acteur DESC');
-
-  // On affiche chaque entrée une à une
   while ($donnees = $reponse->fetch())
   {
   ?>
@@ -61,14 +46,9 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   
   <?php
   }
-
   $reponse->closeCursor(); // Termine le traitement de la requête
   ?>
   </div>
+  <?php include("footer.php"); ?>
   </body>
   </html>
-<?php
-}else{
-  header("location:index.php");
-} 
-?>
