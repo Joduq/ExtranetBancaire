@@ -2,6 +2,16 @@
 session_start();
 if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
 {
+    
+}else{
+      header("location:index.php");
+} 
+include('bdd_call.php');
+
+$id_user = $_SESSION['id_user'];
+$id_acteur = $_POST['id_acteur'];
+$post = $_POST['post'];
+
 ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -23,11 +33,7 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
         <input type="submit">
       </p>
     </form>
-
-
-
     <?php
-    var_dump($_POST['post']);
   } elseif(!$_POST['post'] ){
     ?>
     <form action="commentaires.php" method="post" >
@@ -42,31 +48,9 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
       echo 'Veuillez renseigner le champs commentaire';
 
   } else {
-    try
-    {
-      $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
-    }
-    catch(Exception $e)
-    {
-            die('Erreur : '.$e->getMessage());
-    }
-
-
-    // $req = $bdd->prepare('INSERT INTO posts (id_user, id_acteur, post) VALUES(?, ?, ?)');
-    // $req->execute(array($_SESSION['id_user'], $_POST['id_acteur'], $_POST['post']));
-    $req = $bdd->prepare('INSERT INTO posts(id_user,id_acteur,date_add, post) VALUES(:id_user, :id_acteur, CURRENT_TIMESTAMP(),:post)');
-    $req->execute(array(
-        'id_user' => $_SESSION['id_user'],
-        'id_acteur' => $_POST['id_acteur'],
-        'post' =>  $_POST['post']));
+    insert_into_commentaires($id_user,$id_acteur,$post);
     header("Location: acteur.php".'?id='.$_POST['id_acteur']);
     } 
     ?>
   </body>
   </html>
-
-<?php
-}else{
-  header("location:index.php");
-} 
-?>

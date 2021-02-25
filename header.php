@@ -24,7 +24,7 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   <div class="nav-right">
     <img src="logos/user-regular.svg" class="logo-user" alt="user-logo">
     <ul class="list-inline">
-      <li><a href="parametre.php">paramètre</a></li>
+      <li><a href="parametrage.php">paramètres</a></li>
       <li><a href="deconnexion.php">déconnexion</a></li>
     </ul>
   </div> 
