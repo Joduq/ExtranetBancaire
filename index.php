@@ -4,13 +4,25 @@ session_start();
   // setcookie('username','', time() + 365*24*3600,'/','/tests/ExtranetBancaire/');
   // setcookie('password','', time() + 365*24*3600);
 // }
-$username = $_POST['username'];
-
 include('bdd_call.php');
-$resultat= accounts_table($_POST['username']);
-// Comparaison du pass envoyé via le formulaire avec la base
-$isPasswordCorrect = password_verify($_POST['password'], $resultat['password']);
-if (!$_POST['username']){
+$isPasswordCorrect = [];
+if(isset($_POST['username'])){
+  $username = $_POST['username'];
+  $resultat = accounts_table($_POST['username']);
+}
+
+if(isset($resultat['password'])){
+  $password_stored = $resultat['password'];
+}
+
+if(isset($_POST['password'])){
+  $password = $_POST['password'];
+}
+if (isset($password,$password_stored)){
+  $isPasswordCorrect = password_verify($password, $password_stored);
+}
+
+if (!isset($_POST['username'])){
 
 }else{
   if (!$resultat)
@@ -52,9 +64,9 @@ if (!$_POST['username']){
   <form action='' method="post">
       <p>
       <label for="username">Username :</label> 
-      <input type="text" name="username" id="username" value="<?php echo $_POST['username'] ?>"/><br/>
+      <input type="text" name="username" id="username" value="<?php if(isset($username)){echo $username;} ?>"/><br/>
       <label for="password">mot de passe :</label>
-      <input type="password" name="password" id="password" value="<?php echo $_POST['password'] ?>"/><br/>
+      <input type="password" name="password" id="password" value="<?php if(isset($password)){echo $password;} ?>"/><br/>
       <input type="submit" value="Se connecter"/>
       </p>
   </form>

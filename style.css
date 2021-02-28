@@ -1,16 +1,9 @@
 
-
-
-
 *{
   margin:0;
   padding: 0;
   box-sizing: border-box;
-
 }
-
-
-.display-
 
 header{
     position: sticky;
@@ -41,12 +34,12 @@ header{
 }
 
 
-a {
+a{
   text-decoration: none;
 
 }
 
-.list-inline {
+.list-inline{
   list-style: none;
   padding-left: 0px;
 }
@@ -65,23 +58,7 @@ a {
   height: 63px;
 }
 
-p{
-  
-}
-
-h1{
-
-}
-
-
-h2{
- 
-}
-
-h3{
-
-}
-
-body{
-  
+.logo-thumb{
+  width: 50px;
+  height: 63px;
 }

@@ -197,4 +197,18 @@ function update_one_account($nom, $prenom, $password_hash, $question, $reponse, 
       $query->execute(array($nom, $prenom, $password_hash, $question, $reponse, $id_user));
 }
 
+function count_vote_user_for_acteur($id_user, $id_acteur){
+  $bdd = bdd_call();
+  $req = $bdd->prepare('SELECT COUNT(*) FROM votes WHERE id_user = :id_user AND id_acteur = :id_acteur');
+  $req->execute(array('id_user' =>$id_user,'id_acteur' =>$id_acteur));
+  return $count = $req->fetchColumn();
+}
+
+function insert_vote($id_user, $id_acteur, $votes){
+  $bdd = bdd_call();
+  $req = $bdd->prepare('INSERT INTO votes (id_user, id_acteur, votes) VALUES(?, ?, ?)');
+  $req->execute(array($_GET['id_user'], $_GET['id_acteur'], $_GET['votes']));
+}
+
+
 ?>

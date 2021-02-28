@@ -1,8 +1,32 @@
 <?php
 session_start();
+include('bdd_call.php');
 if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
-{
-  ?>
+{ 
+
+}else{
+  header("location:index.php");
+}
+
+ 
+
+  if (isset($_GET['id_user']) AND isset($_GET['id_acteur']) AND isset($_GET['votes'])){
+    $id_user = $_GET['id_user'];
+    $id_acteur = $_GET['id_acteur'];
+    $votes = $_GET['votes'];
+
+    $count = count_vote_user_for_acteur($id_user, $id_acteur);
+
+    if ($count < 1 )
+    {
+      insert_vote($id_user, $id_acteur, $votes);
+    }
+    header("Location: acteur.php".'?id='.$_GET['id_acteur']);
+  } else{
+    header('Location: acteurs.php');
+  }
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,37 +37,5 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   <title>Document</title>
 </head>
 <body>
-  <?php
-  if (isset($_GET['id_user']) AND isset($_GET['id_acteur']) AND isset($_GET['votes'])){
-
-    try
-    {
-      $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
-    }
-    catch(Exception $e)
-    {
-            die('Erreur : '.$e->getMessage());
-    }
-    $req_a = $bdd->prepare('SELECT COUNT(*) FROM votes WHERE id_user = :id_user AND id_acteur = :id_acteur');
-    $req_a->execute(array('id_user' =>$_GET['id_user'],'id_acteur' =>$_GET['id_acteur']));
-    $count = $req_a->fetchColumn();
-
-    if ($count < 1 )
-    {
-        $req = $bdd->prepare('INSERT INTO votes (id_user, id_acteur, votes) VALUES(?, ?, ?)');
-        $req->execute(array($_GET['id_user'], $_GET['id_acteur'], $_GET['votes']));
-    }
-    header("Location: acteur.php".'?id='.$_GET['id_acteur']);
-  } else{
-    header('Location: acteurs.php');
-  }
-
-
-  ?>
 </body>
 </html>
-<?php
-}else{
-  header("location:index.php");
-} 
-?>

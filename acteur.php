@@ -27,7 +27,6 @@ foreach($array_of_comments as $comment){
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <link href="css/all.css" rel="stylesheet">
   <title>commentaires blog</title>
 </head>
 <a href="acteurs.php">retour à la page acteur</a>
@@ -50,7 +49,8 @@ foreach($array_of_comments as $comment){
 </p>
 <button>nouveau commentaire</button>
 <a href="commentaires.php?id_acteur=<?php echo $_GET['id'];?>">commentaire</a>
-<a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><i class="far fa-thumbs-up"></i></a>
+<a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><img src="logos/thumbs-up-regular.svg" class="logo-thumb" alt="thumbs up"></a>
+<a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=0"><img src="logos/thumbs-down-regular.svg" class="logo-thumb" alt="thumbs down"></a>
 
 <?php
 foreach($display_comments as $comment){

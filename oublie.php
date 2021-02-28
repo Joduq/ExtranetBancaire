@@ -67,7 +67,7 @@ if (!isset($_POST['password'])){
       </p>
     </form>
 </div> 
-  <a href="connexion.php">retour à la page d'accueil</a>
+  <a href="index.php">retour à la page d'accueil</a>
   <div style="<?php echo "display:".$state_b ?>">
     <p>question secrète: <?php echo htmlspecialchars($donnees['question']);?></p>
 
