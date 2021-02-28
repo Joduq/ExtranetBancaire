@@ -126,10 +126,10 @@ function select_one_acteur($id_acteur){
   return $donnees = $reponse_a->fetch();
 }
 
-function thumbs_count($id_acteur){
+function thumbs_count($id_acteur,$type_votes){
   $bdd = bdd_call();
-  $req_d = $bdd->prepare('SELECT COUNT(*) FROM votes WHERE id_acteur = :id_acteur AND votes > 0');
-  $req_d->execute(array('id_acteur' =>$id_acteur));
+  $req_d = $bdd->prepare('SELECT COUNT(*) FROM votes WHERE id_acteur = :id_acteur AND votes = :type_votes');
+  $req_d->execute(array('id_acteur' =>$id_acteur, 'type_votes' =>$type_votes ));
   return $count = $req_d->fetchColumn();
 }
 

@@ -8,23 +8,21 @@ if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
   header("location:index.php");
 }
 
- 
+if (isset($_GET['id_user']) AND isset($_GET['id_acteur']) AND isset($_GET['votes'])){
+  $id_user = $_GET['id_user'];
+  $id_acteur = $_GET['id_acteur'];
+  $votes = $_GET['votes'];
 
-  if (isset($_GET['id_user']) AND isset($_GET['id_acteur']) AND isset($_GET['votes'])){
-    $id_user = $_GET['id_user'];
-    $id_acteur = $_GET['id_acteur'];
-    $votes = $_GET['votes'];
+  $count = count_vote_user_for_acteur($id_user, $id_acteur);
 
-    $count = count_vote_user_for_acteur($id_user, $id_acteur);
-
-    if ($count < 1 )
-    {
-      insert_vote($id_user, $id_acteur, $votes);
-    }
-    header("Location: acteur.php".'?id='.$_GET['id_acteur']);
-  } else{
-    header('Location: acteurs.php');
+  if ($count < 1 )
+  {
+    insert_vote($id_user, $id_acteur, $votes);
   }
+  header("Location: acteur.php".'?id='.$_GET['id_acteur']);
+} else{
+  header('Location: acteurs.php');
+}
 
 ?>
 

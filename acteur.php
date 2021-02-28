@@ -9,7 +9,8 @@ include('bdd_call.php');
 $id_acteur = $_GET['id'];
 $donnees=select_one_acteur($id_acteur);
 $bdd = bdd_call();
-$count = thumbs_count($id_acteur);
+$count_up = thumbs_count($id_acteur,1);
+$count_down = thumbs_count($id_acteur,0);
 $array_of_comments = all_comments($id_acteur);
 
 foreach($array_of_comments as $comment){
@@ -45,12 +46,17 @@ foreach($array_of_comments as $comment){
 
 <h2>Commentaires</h2> 
 <p>
-  <?php echo($count);?> likes
+  <?php echo($count_up);?> likes
+  <?php echo($count_down);?> dislikes
 </p>
-<button>nouveau commentaire</button>
+<p>
+  <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><img src="logos/thumbs-up-regular.svg" class="logo-thumb" alt="thumbs up"></a>
+  <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=0"><img src="logos/thumbs-down-regular.svg" class="logo-thumb" alt="thumbs down"></a>
+</p>
+ 
+
 <a href="commentaires.php?id_acteur=<?php echo $_GET['id'];?>">commentaire</a>
-<a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><img src="logos/thumbs-up-regular.svg" class="logo-thumb" alt="thumbs up"></a>
-<a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=0"><img src="logos/thumbs-down-regular.svg" class="logo-thumb" alt="thumbs down"></a>
+
 
 <?php
 foreach($display_comments as $comment){
