@@ -17,16 +17,27 @@
   
   // verification que le username est bien unique et n existe pas dans la bdd
   include('bdd_call.php');
-  $valid_username = valid_username($_POST['username']);
-  
-  
-  $nom = $_POST['nom'];
-  $prenom = $_POST['prenom'];
-  $username = $_POST['username'];
-  $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);   
-  $question = $_POST['question'];
-  $reponse = $_POST['reponse'];
-  if (!$_POST['username']){
+  if(isset($_POST['username'])){
+      $username = $_POST['username'];
+      $valid_username = valid_username($_POST['username']);
+  }
+  if(isset($_POST['nom'])){
+    $nom = $_POST['nom'];
+  }
+  if(isset($_POST['prenom'])){
+    $prenom = $_POST['prenom'];
+  }
+  if(isset($_POST['password'])){
+    $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+  }
+  if(isset($_POST['question'])){
+    $question = $_POST['question'];
+  }
+  if(isset($_POST['reponse'])){
+    $reponse = $_POST['reponse'];
+  }
+
+  if (!isset($_POST['username'])){
 
   }else{
     if( confirm_password($_POST['password'],$_POST['confirpassword'])==TRUE && $valid_username==TRUE && $_POST['prenom'] && $_POST['nom'] && $_POST['question'] && $_POST['reponse']){
@@ -83,15 +94,15 @@
   <form action="inscription.php" method="post">
     <p>
     <label for="prenom">prénom :</label> 
-    <input type="text" name="prenom" id="prenom" value="<?php echo $_POST['prenom'] ?>"/><br/>
+    <input type="text" name="prenom" id="prenom" value="<?php if(isset($prenom)){echo $prenom;} ?>"/><br/>
     <label for="nom">nom :</label> 
-    <input type="text" name="nom" id="nom" value="<?php echo $_POST['nom'] ?>"/><br/>
+    <input type="text" name="nom" id="nom" value="<?php if(isset($nom)){echo $nom;} ?>"/><br/>
     <label for="username">username :</label> 
-    <input type="text" name="username" id="username" value="<?php echo $_POST['username'] ?>"/><br/>
+    <input type="text" name="username" id="username" value="<?php if(isset($username)){echo $username;} ?>"/><br/>
     <label for="password">mot de passe :</label>
-    <input type="password" name="password" id="password" value="<?php echo $_POST['password'] ?>"/><br/>
+    <input type="password" name="password" id="password" value="<?php if(isset($password)){echo $password;} ?>"/><br/>
     <label for="confirpassword">confirmation du mot de passe:</label>
-    <input type="password" name="confirpassword" id="confirpassword" value="<?php echo $_POST['confirpassword'] ?>"/><br/>
+    <input type="password" name="confirpassword" id="confirpassword" value=""/><br/>
     <label for="question">entrez votre question secrète :</label>
     <textarea name="question" id="question">ex: Quel est le nom de votre animal de compagnie?</textarea><br/>
     <label for="reponse">entrez la reponse à votre question secrète :</label>

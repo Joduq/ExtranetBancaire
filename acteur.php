@@ -54,8 +54,7 @@ foreach($array_of_comments as $comment){
   <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=0"><img src="logos/thumbs-down-regular.svg" class="logo-thumb" alt="thumbs down"></a>
 </p>
  
-
-<a href="commentaires.php?id_acteur=<?php echo $_GET['id'];?>">commentaire</a>
+  <button><a href="commentaires.php?id_acteur=<?php echo $_GET['id'];?>">commentaire</a></button>
 
 
 <?php
