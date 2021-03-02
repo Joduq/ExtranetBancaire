@@ -8,7 +8,9 @@
   header("location:index.php");
   }
   include('bdd_call.php');
-  $donnees= select_one_account($username);
+  if(isset($username)){
+    $donnees= select_one_account($username);
+  }
 
 
 
@@ -91,17 +93,17 @@
   <form action="parametrage.php" method="post">
     <p>
     <label for="prenom">prénom :</label> 
-    <input type="text" name="prenom" id="prenom" value="<?php echo $donnees['prenom'] ?>"/><br/>
+    <input type="text" name="prenom" id="prenom" value="<?php if(isset($donnees['prenom'])){echo $donnees['prenom'];} ?>"/><br/>
     <label for="nom">nom :</label> 
-    <input type="text" name="nom" id="nom" value="<?php echo $donnees['nom'] ?>"/><br/>
+    <input type="text" name="nom" id="nom" value="<?php if(isset($donnees['nom'])){echo $donnees['nom'];} ?>"/><br/>
     <label for="password">mot de passe :</label>
     <input type="password" name="password" id="password" value=""/><br/>
     <label for="confirpassword">confirmation du mot de passe:</label>
     <input type="password" name="confirpassword" id="confirpassword" value=""/><br/>
     <label for="question">entrez votre question secrète :</label>
-    <textarea name="question" id="question"><?php echo $donnees['question'] ?></textarea><br/>
+    <textarea name="question" id="question"><?php if(isset($donnees['question'])){echo $donnees['question'];} ?></textarea><br/>
     <label for="reponse">entrez la reponse à votre question secrète :</label>
-    <textarea name="reponse" id="reponse"><?php echo $donnees['reponse'] ?></textarea>  <br/>
+    <textarea name="reponse" id="reponse"><?php if(isset($donnees['reponse'])){echo $donnees['reponse'];} ?></textarea>  <br/>
     <input type="submit"/>
     </p>
   </form>

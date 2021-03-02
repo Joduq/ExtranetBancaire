@@ -48,13 +48,6 @@ foreach($array_of_acteurs as $acteur){
       foreach($display_acteurs as $acteur){
       echo $acteur;
       }
-
-
-
-
-
-
-      
       include("footer.php"); 
     ?>
   </body>
