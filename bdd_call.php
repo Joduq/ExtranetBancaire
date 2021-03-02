@@ -96,18 +96,9 @@ function insert_into_accounts ($nom, $prenom, $username, $password_hash, $questi
         'reponse' => $reponse));
 }
 function select_all_acteurs(){
-  try
-  {
-
-    $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root');
-  }
-  catch(Exception $e)
-  {
-
-          die('Erreur : '.$e->getMessage());
-  }
-
-  return $reponse = $bdd->query('SELECT * FROM acteurs ORDER BY id_acteur DESC');
+  $bdd = bdd_call();
+  $reponse = $bdd->query('SELECT * FROM acteurs ORDER BY id_acteur DESC');
+  return $acteurs = $reponse->fetchAll();
 }
 
 function select_one_acteur($id_acteur){
