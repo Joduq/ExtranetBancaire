@@ -33,7 +33,7 @@
   
   function add_to_bdd(){
   
-  
+  // mettre des specialchart sur les vaziables ci dessous
     $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $prenom = $_POST['prenom'];
     $nom = $_POST['nom'];

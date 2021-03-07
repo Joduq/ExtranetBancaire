@@ -5,30 +5,62 @@
   box-sizing: border-box;
 }
 
+body{
+  background-color: rgb(231, 231, 231);
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+main{
+  flex-grow:1;
+}
+
 header{
     position: sticky;
     position:-webkit-sticky;
     top:0;
     margin:auto;
-    padding:2vh;
-    background-color:antiquewhite;
+    /* background-color:#807d7b; */
     width:100%;
     display:flex;
     justify-content: space-between;
+    background: rgb(34, 41, 51);
+    background: linear-gradient(180deg, rgba(34, 41, 51,1) 0%, rgb(105, 103, 102) 100%);
 
 }
-
+.nav-left{
+  padding:8px;
+  padding-left: 32px;
+}
 .nav-right{
+  padding:18px;
   display:flex;
   justify-content: space-between;
+  align-items: center;
+  padding-right: 32px;
+
 }
 .nav-right p {
   padding:5px 10px;
+  color:#c1c1c1;
 }
 
+footer{
+  text-align: center;
+  background-color: rgb(34, 41, 51);
+  padding: 16px;
+  bottom: 0;
+  margin-top: 8px;
+}
 
 a{
   text-decoration: none;
+  color:#c1c1c1;
+
+}
+a:hover{
+  color:red;
 
 }
 
@@ -37,21 +69,17 @@ a{
   padding-left: 0px;
 }
 .list-inline > li {
-  padding-bottom: 10%;
+  display: inline-block;
+  padding: 0px 20px;
 }
 
 
 
 .logo{
-  width: 65px;
-  height: 83px;
+  width: 55px;
+  height: 73px;
 }
 
-
-.logo-thumb{
-  width: 50px;
-  height: 63px;
-}
 
 /* Dropdown Button */
 .dropbtn {
@@ -100,7 +128,7 @@ a{
 
 }
 
-.nav-right:hover{
+.nav-right:hover > p{
   color:red;
 }
 .nav-right:hover .dropdown .dropbtn{
@@ -111,3 +139,296 @@ a{
 
 }
 
+/* mise en place du container responsive */
+.container{
+  width:1200px;
+  margin: 0 auto;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+@media (max-width: 720px) {
+  /* For a screen < 720px, this CSS will be read */
+  .container {
+    width: 700px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 540px) {
+  /* For a screen < 540px, this CSS will be read */
+  .container {
+    width: 300px;
+    margin: 0 auto;
+  }
+}
+
+
+/*************************************** */
+/* description de la carte acteur */
+
+.card-acteur{
+  height: 150px;
+  width: 100%;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  background-color: white;
+}
+
+.card-acteur-img{
+  height:100%;
+  width:300px;
+  object-fit:contain;
+  padding:8px;
+  margin-right:4px;
+  border-radius:12px;
+}
+
+.card-acteur-infos{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  width:100%;
+  padding:8px;
+}
+
+ .cards{
+   padding-bottom: 32px;
+ }
+.card-description{
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.card-acteur-infos h3{
+  padding-bottom: 8px;
+}
+.card-description p{
+  text-align: justify;
+  opacity: .7;
+  
+  
+}
+.card-btn{
+  width: 300px;
+  height: 100%;
+  display:flex;
+  align-items: flex-end;
+}
+.card-btn button{
+  border-radius: 12px;
+  background-color: rgb(34, 41, 51);
+  width: 100%;
+  height: 40px;
+  margin:8px; 
+}
+
+.card-btn button:hover{
+  color:rgb(34, 41, 51);
+  background-color:red;
+
+}
+
+.card-btn button:hover a{
+  color:rgb(34, 41, 51);
+
+
+}
+
+
+/*********************************/
+
+.banner {
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url("logos/palais/téléchargement-2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 75px 0;
+}
+
+.banner h1 {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.banner p {
+  font-size: 20px;
+  color: white;
+  opacity: .7;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+/***************************************************** */
+
+.titre-acteurs{
+  padding:50px;
+}
+
+.titre-acteurs h2{
+  font-size: 24px;
+  margin-bottom: 16px;
+  font-weight: bold;
+
+}
+
+.titre-acteurs p{
+  font-size: 20px;
+  opacity: .7;
+}
+
+
+/*************************************** */
+/* description de la carte acteur */
+.card-acteur-column{
+  height:auto;
+  width: 500px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  margin-top: 16px;
+  background-color: white;
+}
+.card-commentaires-column{
+  height:auto;
+  width: 500px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 12px;
+  margin: 8px 0;
+  background-color: white;
+}
+
+.card-acteur-column-infos{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /* overflow: hidden; */
+  width:100%;
+  padding:8px;
+}
+.card-acteur-img-center{
+  display:flex;
+  justify-content: space-evenly;
+}
+.card-commentaire-infos{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin:8px;
+}
+.card-commentaire-infos a img{
+  height: 24px;
+  width: 24px;
+}
+.card-commentaire-input{
+  display: flex;
+}
+.card-commentaire-like{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 12px;
+  background-color: rgb(34, 41, 51);
+  padding: 0 24px;
+  margin-left: 4px;
+  border-top: 2px solid rgb(119, 119, 119);
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  border-left: 2px solid rgb(119, 119, 119);
+}
+
+.card-commentaire-like p{
+  color: #c1c1c1;
+  font-weight: bolder;
+  margin-right: 2px;
+}
+
+.thumb-up{
+  display: flex;
+  align-items: center;
+}
+.thumb-up:hover a #thumb-up{
+  content: url("logos/thumbs-up-regular-red.svg");
+}
+
+.thumb-up:hover p{
+  color:red;
+}
+
+.thumb-down{
+  display: flex;
+  align-items: center;
+}
+.thumb-down:hover a #thumb-down{
+  content: url("logos/thumbs-down-regular-red.svg");
+}
+
+.thumb-down:hover p{
+  color:red;
+}
+
+.card-btn-commentaire button{
+  border-radius: 12px;
+  background-color: rgb(34, 41, 51);
+  width: auto;
+  height: 40px;
+  padding: 0 8px;
+ 
+}
+
+.card-btn-commentaire button:hover{
+  color:rgb(34, 41, 51);
+  background-color:red;
+
+}
+
+.card-btn-commentaire button:hover a{
+  color:rgb(34, 41, 51);
+
+
+}
+
+.card-commentaires{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.commentaire{
+  display:flex;
+  flex-direction: column;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  margin: 4px 8px 8px 8px;
+  padding:8px;
+}
+
+.overflow-wrap{
+  overflow-wrap: break-word;
+  text-align: justify;
+}
+
+.name{
+  font-weight:bolder;
+}
+.time{
+  font-style: italic;
+  text-align: justify;
+  /* opacity: .7; */
+}
+
+/************************************/

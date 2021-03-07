@@ -2,20 +2,25 @@
 session_start();
 
 if (isset($_SESSION['id_user']) AND isset($_SESSION['username']))
-{}else{
+{
+
+}else{
   header("location:index.php");
 }
+
 include('bdd_call.php');
+
 $id_acteur = $_GET['id'];
-$donnees=select_one_acteur($id_acteur);
+$donnees_acteur=select_one_acteur($id_acteur);
 $bdd = bdd_call();
 $count_up = thumbs_count($id_acteur,1);
 $count_down = thumbs_count($id_acteur,0);
+$count_comments = comments_count($id_acteur);
 $array_of_comments = all_comments($id_acteur);
 
 foreach($array_of_comments as $comment){
   $users = user_params($comment);
-  $display_comments[] = '<P>'.$users['prenom'].'</p>'.'<p>'.'le '.$comment['jour'].'/'.$comment['mois'].'/'.$comment['annee'].' à '.$comment['heure'].'h'.$comment['minute'].'m'.$comment['seconde'].'s'.'</br>'.$comment['post'].'</p>';
+  $display_comments[] = '<div class="commentaire"><P class="name">'.$users['prenom'].'</p>'.'<p class="time">'.'le '.$comment['jour'].'/'.$comment['mois'].'/'.$comment['annee'].' à '.$comment['heure'].'h'.$comment['minute'].'m'.$comment['seconde'].'s :</p>'.'<p class="overflow-wrap">'.$comment['post'].'</p></div>';
 }
 
 ?>
@@ -30,37 +35,52 @@ foreach($array_of_comments as $comment){
   <link rel="stylesheet" href="style.css">
   <title>commentaires blog</title>
 </head>
-<a href="acteurs.php">retour à la page acteur</a>
-<div class="news">
-  <p>
-    <img src="logos/<?php echo htmlspecialchars($donnees['logo']); ?>" alt="logo acteur">
-  </p>
-  <h3>
-    <?php echo htmlspecialchars($donnees['description']);?>
-    <a href="<?php echo $donnees['lien'];?>"><?php echo $donnees['lien'];?></a>
-  </h3>
-  <p>
-    <button  type="button"><a href="commentaires.php?id=<?php echo $donnees['id']; ?>">Lire la suite</a></button>
-  </p>
-</div>
-
-<h2>Commentaires</h2> 
-<p>
-  <?php echo($count_up);?> likes
-  <?php echo($count_down);?> dislikes
-</p>
-<p>
-  <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><img src="logos/thumbs-up-regular.svg" class="logo-thumb" alt="thumbs up"></a>
-  <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=0"><img src="logos/thumbs-down-regular.svg" class="logo-thumb" alt="thumbs down"></a>
-</p>
- 
-  <button><a href="commentaires.php?id_acteur=<?php echo $_GET['id'];?>">commentaire</a></button>
-
-
-<?php
-foreach($display_comments as $comment){
-  echo $comment;
-}
-?>
+<body>
+<?php include("header.php"); ?>
+<main>
+  <div class="container">
+    <div class="card-acteur-column">
+      <div class="card-acteur-img-center">
+        <img class="card-acteur-img" src="logos/<?php echo htmlspecialchars($donnees_acteur['logo']);?>" alt="logo acteur">
+      </div>
+      <div class="card-acteur-column-infos">
+        <h3> <?php echo htmlspecialchars($donnees_acteur['acteur']); ?></h3>
+        <div class="card-description">
+          <p><?php echo htmlspecialchars($donnees_acteur['description']); ?></p>
+        </div>
+        <a href="<?php echo htmlspecialchars($donnees_acteur['lien']); ?>"><?php echo htmlspecialchars($donnees_acteur['lien']); ?></a>
+      </div>
+    </div>
+    <div class="card-commentaires-column">
+      <div class="card-commentaire-infos">
+        <h2> <?php echo htmlspecialchars($count_comments);?> commentaires</h2> 
+        <div class="card-commentaire-input">
+          <div class="card-btn-commentaire"><button><a href="commentaires.php?id_acteur=<?php echo $_GET['id'];?>">nouveau commentaire</a></button>
+          </div>
+          <div class="card-commentaire-like">
+            <div class="thumb-up">      
+              <p><?php echo($count_up);?></p>
+              <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><img src="logos/thumbs-up-regular.svg" id="thumb-up" alt="thumbs up"></a>
+            </div>
+            <div class="thumb-down">
+              <p><?php echo($count_down);?></p>          
+              <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=0"><img src="logos/thumbs-down-regular.svg" id="thumb-down" alt="thumbs down"></a>
+            </div> 
+          </div>
+        </div>
+      </div>
+      <div class="card-commentaires">      
+        <?php
+        foreach($display_comments as $comment){
+          echo $comment;
+        }
+        ?>
+      </div>
+    </div>  
+  </div>
+</main>
+<footer>
+  <?php include("footer.php"); ?>
+</footer>
 </body>
 </html>

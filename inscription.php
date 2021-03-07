@@ -47,7 +47,7 @@
       $_SESSION['prenom'] = $resultat['prenom'];
       $_SESSION['nom'] = $resultat['nom'];
       $_SESSION['username'] = $username;
-      header("location: acteurs.php");
+      header("location: index.php");
     }else{
       if(confirm_password($_POST['password'],$_POST['confirpassword'])==FALSE )
       {

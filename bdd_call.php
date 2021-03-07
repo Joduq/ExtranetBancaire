@@ -124,6 +124,13 @@ function thumbs_count($id_acteur,$type_votes){
   return $count = $req_d->fetchColumn();
 }
 
+function comments_count($id_acteur){
+  $bdd = bdd_call();
+  $req = $bdd->prepare('SELECT COUNT(*) FROM posts WHERE id_acteur = :id_acteur');
+  $req->execute(array('id_acteur' =>$id_acteur));
+  return $count = $req->fetchColumn();
+}
+
 
 function all_comments($id_acteur){
   $bdd = bdd_call();
