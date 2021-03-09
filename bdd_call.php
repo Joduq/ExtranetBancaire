@@ -135,7 +135,7 @@ function comments_count($id_acteur){
 function all_comments($id_acteur){
   $bdd = bdd_call();
   $reponse = $bdd->prepare("SELECT id_post, id_user, id_acteur, date_add,post, DAY(date_add) AS jour, MONTH(date_add) AS mois,
-  YEAR(date_add) AS annee, HOUR(date_add) AS heure, MINUTE(date_add) AS minute, SECOND(date_add) AS seconde FROM posts WHERE id_acteur=?");
+  YEAR(date_add) AS annee, HOUR(date_add) AS heure, MINUTE(date_add) AS minute, SECOND(date_add) AS seconde FROM posts WHERE id_acteur=? ORDER BY id_post DESC");
   $reponse->execute(array($id_acteur));
   return $comments = $reponse->fetchAll();
 }

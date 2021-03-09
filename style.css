@@ -4,14 +4,49 @@
   padding: 0;
   box-sizing: border-box;
 }
+@font-face{
+  font-family: 'Roboto';
+  src:url('police/Roboto-Regular.ttf')format('truetype');
+}
+@font-face{
+  font-family: 'openSans';
+  src: url('police/OpenSans-Regular.ttf')format('truetype');
+}
+h1{
+  font-family:'Roboto','Times New Roman';
+}
 h2{
   margin-top:8px;
   margin-bottom: 16px;
+  font-family:'Roboto','Times New Roman';
 }
 h3{
   margin-bottom: 8px;
-  margin-top: 8px
+  margin-top: 8px;
+  font-family:'Roboto','Times New Roman';
 }
+
+p{
+  font-family: 'openSans',Arial, Helvetica, sans-serif;
+}
+
+a{
+  font-family: 'openSans',Arial, Helvetica, sans-serif;
+}
+
+label{
+  font-family: 'openSans',Arial, Helvetica, sans-serif;
+}
+
+input{
+  font-family: 'openSans',Arial, Helvetica, sans-serif;
+}
+
+li{
+  font-family: 'openSans',Arial, Helvetica, sans-serif;
+}
+
+
 
 body{
   background-color: rgb(231, 231, 231);
@@ -31,7 +66,7 @@ header{
     position: sticky;
     position:-webkit-sticky;
     top:0;
-    margin:auto;
+    margin:0;
     /* background-color:#807d7b; */
     width:100%;
     display:flex;
@@ -151,7 +186,7 @@ a:hover{
 
 /* mise en place du container responsive */
 .container{
-  width:1200px;
+  width:700px;
   margin: 0 auto;
   display:flex;
   align-items: center;
@@ -159,19 +194,43 @@ a:hover{
 }
 
 
-@media (max-width: 720px) {
+@media (max-width: 770px) {
   /* For a screen < 720px, this CSS will be read */
   .container {
-    width: 700px;
+    width: 500px;
     margin: 0 auto;
+  }
+  .card-acteur{
+    height: auto;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background-color: white;
+    align-items: center;
   }
 }
 @media (max-width: 540px) {
   /* For a screen < 540px, this CSS will be read */
   .container {
-    width: 300px;
+    width: 350px;
     margin: 0 auto;
   }
+  .card-acteur{
+    height: auto;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background-color: white;
+    align-items: center;
+  } 
 }
 
 
@@ -300,7 +359,7 @@ a:hover{
 /* description de la carte acteur */
 .card-acteur-column{
   height:auto;
-  width: 500px;
+  width: 100%;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   justify-content: space-between;
@@ -312,7 +371,7 @@ a:hover{
 }
 .card-commentaires-column{
   height:auto;
-  width: 500px;
+  width: 100%;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   justify-content: space-between;
@@ -394,7 +453,7 @@ a:hover{
 .card-btn-commentaire button{
   border-radius: 12px;
   background-color: rgb(34, 41, 51);
-  width: auto;
+  width: 100%;
   height: 40px;
   padding: 0 8px;
  
@@ -445,7 +504,7 @@ a:hover{
 
 .card-option-column{
   height:auto;
-  width: 500px;
+  width: 100%;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   justify-content: space-between;
@@ -463,7 +522,7 @@ a:hover{
   color:#c1c1c1;
   width: 100%;
   height: 40px;
-  margin:8px; 
+  margin:8px auto; 
 }
 
 .btn-option:hover{

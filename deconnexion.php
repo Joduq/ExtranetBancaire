@@ -7,7 +7,6 @@ session_destroy();
 
 // Suppression des cookies de connexion automatique
 setcookie('username', '');
-setcookie('polo', '');
 setcookie('password', '');
 header("location:index.php");
 ?>

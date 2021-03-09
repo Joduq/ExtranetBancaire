@@ -33,7 +33,7 @@ $acteurs = select_all_acteurs();
           <p>les acteurs s'unissent et proposent les meilleurs produits bancaires et assurances pour les 80 millions de comptes présent sur le territoire français</p>
         </div>
         <div class="cards">
-        <?php foreach($acteurs as $acteur){ ?>
+          <?php foreach($acteurs as $acteur){ ?>
             <div class="card-acteur">
               <div>
                 <img class="card-acteur-img" src="logos/<?php echo htmlspecialchars($acteur['logo']);?>" alt="logo acteur">
@@ -49,7 +49,7 @@ $acteurs = select_all_acteurs();
                 <button  type="button"><a href="acteur.php?id=<?php echo htmlspecialchars($acteur['id_acteur']) ?>">Lire la suite</a></button>
               </div>
             </div>
-        <?php } ?>
+          <?php } ?>
         </div>
       </div>
     </main>

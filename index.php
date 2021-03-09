@@ -48,7 +48,7 @@ if (!isset($_POST['username'])){
         header("location: acteurs.php");
     }
     else {
-        $error_message = '<ul class="list"><li>-Mauvais identifiant ou mot de passe !.</li></ul>';
+        $error_message = '<ul class="list"><li>-Mauvais identifiant ou mot de passe.</li></ul>';
         $state_display = 'initial';
     }
   }
