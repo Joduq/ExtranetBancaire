@@ -27,7 +27,7 @@ foreach($array_of_comments as $comment){
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,16 +55,16 @@ foreach($array_of_comments as $comment){
       <div class="card-commentaire-infos">
         <h2> <?php echo htmlspecialchars($count_comments);?> commentaires</h2> 
         <div class="card-commentaire-input">
-          <div class="card-btn-commentaire"><button><a href="commentaires.php?id_acteur=<?php echo $_GET['id'];?>">nouveau commentaire</a></button>
+          <div class="card-btn-commentaire"><button><a href="commentaires.php?id_acteur=<?php echo htmlspecialchars($_GET['id']);?>">nouveau commentaire</a></button>
           </div>
           <div class="card-commentaire-like">
             <div class="thumb-up">      
-              <p><?php echo($count_up);?></p>
-              <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=1"><img src="logos/thumbs-up-regular.svg" id="thumb-up" alt="thumbs up"></a>
+              <p><?php echo htmlspecialchars($count_up);?></p>
+              <a href="votes.php?id_acteur=<?php echo htmlspecialchars($_GET['id']);?>&amp;id_user=<?php echo htmlspecialchars($_SESSION['id_user']);?>&amp;votes=1"><img src="logos/thumbs-up-regular.svg" id="thumb-up" alt="thumbs up"></a>
             </div>
             <div class="thumb-down">
-              <p><?php echo($count_down);?></p>          
-              <a href="votes.php?id_acteur=<?php echo $_GET['id'];?>&amp;id_user=<?php echo $_SESSION['id_user'];?>&amp;votes=0"><img src="logos/thumbs-down-regular.svg" id="thumb-down" alt="thumbs down"></a>
+              <p><?php echo htmlspecialchars($count_down);?></p>          
+              <a href="votes.php?id_acteur=<?php echo htmlspecialchars($_GET['id']);?>&amp;id_user=<?php echo htmlspecialchars($_SESSION['id_user']);?>&amp;votes=0"><img src="logos/thumbs-down-regular.svg" id="thumb-down" alt="thumbs down"></a>
             </div> 
           </div>
         </div>
@@ -72,7 +72,7 @@ foreach($array_of_comments as $comment){
       <div class="card-commentaires">      
         <?php
         foreach($display_comments as $comment){
-          echo $comment;
+          echo($comment);
         }
         ?>
       </div>
