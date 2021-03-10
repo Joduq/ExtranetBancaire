@@ -15,6 +15,7 @@ $acteurs = select_all_acteurs();
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="style.css" />
+    <link rel="short icon" type="image/png" href="logos/GBAF.png">
     <title>blog</title>
   </head>
   <body>

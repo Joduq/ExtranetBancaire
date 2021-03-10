@@ -4,6 +4,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+
 @font-face{
   font-family: 'Roboto';
   src:url('police/Roboto-Regular.ttf')format('truetype');
@@ -12,6 +14,51 @@
   font-family: 'openSans';
   src: url('police/OpenSans-Regular.ttf')format('truetype');
 }
+
+@media screen and (max-width: 540px) {
+
+  .container {
+    width: 300px !important;
+    margin: 0 auto;
+  }
+  .card-acteur{
+    height: 100% !important;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background-color: white;
+    align-items: center;
+  }
+  .card-commentaire-infos{
+    flex-direction: column;
+  }
+}
+
+
+@media screen and (max-width: 770px) {
+
+  .container {
+    width: 500px;
+    margin: 0 auto;
+  }
+  .card-acteur{
+    height: 100% !important;
+    width: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background-color: white;
+    align-items: center;
+  }
+}
+
 h1{
   font-family:'Roboto','Times New Roman';
 }
@@ -193,47 +240,6 @@ a:hover{
   flex-direction: column;
 }
 
-
-@media (max-width: 770px) {
-  /* For a screen < 720px, this CSS will be read */
-  .container {
-    width: 500px;
-    margin: 0 auto;
-  }
-  .card-acteur{
-    height: auto;
-    width: 100%;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    background-color: white;
-    align-items: center;
-  }
-}
-@media (max-width: 540px) {
-  /* For a screen < 540px, this CSS will be read */
-  .container {
-    width: 350px;
-    margin: 0 auto;
-  }
-  .card-acteur{
-    height: auto;
-    width: 100%;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 12px;
-    margin-bottom: 16px;
-    background-color: white;
-    align-items: center;
-  } 
-}
-
-
 /*************************************** */
 /* description de la carte acteur */
 
@@ -266,7 +272,7 @@ a:hover{
   padding:8px;
 }
 
- .cards{
+.cards{
    padding-bottom: 32px;
  }
 .card-description{
