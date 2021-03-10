@@ -38,7 +38,7 @@
     $prenom = $_POST['prenom'];
     $nom = $_POST['nom'];
     $question = $_POST['question'];
-    $reponse = $_POST['reponse'];
+    $reponse = password_hash($_POST['reponse'], PASSWORD_DEFAULT);
     $id_user = $_SESSION['id_user'];
     update_one_account($nom, $prenom, $password_hash, $question, $reponse, $id_user);
   

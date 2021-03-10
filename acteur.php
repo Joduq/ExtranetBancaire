@@ -72,8 +72,10 @@ foreach($array_of_comments as $comment){
       </div>
       <div class="card-commentaires">      
         <?php
-        foreach($display_comments as $comment){
-          echo($comment);
+        if(isset($display_comments)){
+          foreach($display_comments as $comment){
+            echo($comment);
+          }
         }
         ?>
       </div>

@@ -28,7 +28,7 @@ if (!isset($_POST['username'])){
 
 if (!isset($_POST['reponse'])){
 }else{
-  if ($_POST['reponse'] != $donnees['reponse']){
+  if (password_verify($_POST['reponse'], $donnees['reponse']) == FALSE){
     $array_of_errors[] = 'mauvaise reponse';
     $state_display ='initial';
   }else{
@@ -71,7 +71,7 @@ if (!isset($_POST['password'])){
           <?php if(isset($array_of_errors)){
                   echo '<ul class="list">';
                   foreach ($array_of_errors as $value) {
-                    echo "<li>-".$value.".</li>";
+                    echo "<li>".$value.".</li>";
                   }
                   echo "</ul>";
                 }

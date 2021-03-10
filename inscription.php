@@ -33,7 +33,7 @@
     $question = htmlspecialchars($_POST['question']);
   }
   if(isset($_POST['reponse'])){
-    $reponse = htmlspecialchars($_POST['reponse']);
+    $reponse = password_hash(htmlspecialchars($_POST['reponse']), PASSWORD_DEFAULT);
   }
 
   if (!isset($_POST['username'])){
@@ -99,7 +99,7 @@
           <?php if(isset($array_of_errors)){
                   echo '<ul class="list">';
                   foreach ($array_of_errors as $value) {
-                    echo "<li>-".$value.".</li>";
+                    echo "<li>".$value.".</li>";
                   }
                   echo "</ul>";
                 }
