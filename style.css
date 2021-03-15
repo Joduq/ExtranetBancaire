@@ -114,6 +114,7 @@ header{
     position:-webkit-sticky;
     top:0;
     margin:0;
+    z-index: 1;
     /* background-color:#807d7b; */
     width:100%;
     display:flex;
@@ -212,12 +213,13 @@ a:hover{
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
 /* Show the dropdown menu on hover */
 .nav-right:hover .dropdown .dropdown-content {
   display: block;
-
 }
 
 .nav-right:hover > p{
