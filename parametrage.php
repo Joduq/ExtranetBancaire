@@ -98,7 +98,7 @@
           <?php if(isset($array_of_errors)){
                   echo '<ul class="list">';
                   foreach ($array_of_errors as $value) {
-                    echo "<li>-".$value.".</li>";
+                    echo "<li>".$value.".</li>";
                   }
                   echo "</ul>";
                 }
@@ -134,7 +134,7 @@
               </tr>
               <tr>
                 <td><label for="reponse">entrez la reponse à votre question secrète :</label></td>
-                <td><textarea name="reponse" id="reponse"><?php if(isset($donnees['reponse'])){echo $donnees['reponse'];} ?></textarea></td>
+                <td><textarea name="reponse" id="reponse"></textarea></td>
             </table>
             <input class="btn-option" type="submit"/>
           </p>

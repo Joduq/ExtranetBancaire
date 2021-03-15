@@ -26,7 +26,7 @@ if(isset($_POST['post'])){
     insert_into_commentaires($id_user,$id_acteur,$post);
     header("Location: acteur.php".'?id='.$id_acteur); 
   }else{
-    $error_message='<ul class="list"><li>-Veuillez renseigner un commentaire.</li></ul>';
+    $error_message='<ul class="list"><li>Veuillez renseigner un commentaire.</li></ul>';
     $state_display = 'initial';
   }
 } 
