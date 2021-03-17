@@ -1,8 +1,20 @@
 <?php
 function bdd_call(){
+  // $servername = 'localhost';
+  // $dbname = 'extranet_bancaire';
+  // $username = 'root';
+  // $password = 'root';
+
+  $servername = 'localhost';
+  $dbname = 'id16400252_extranet_bancaire';
+  $username = 'id16400252_jduquesnoy';
+  $password = '^(Qxud/yiFOt|wI9';
+
+
+
   try
   {
-  return $bdd = new PDO('mysql:host=localhost;dbname=extranet_bancaire;charset=utf8', 'root', 'root', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  return $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
   }
   catch(Exception $e)
   {
@@ -63,7 +75,9 @@ function valid_username($str){
 
 function insert_into_accounts ($nom, $prenom, $username, $password_hash, $question, $reponse){
   $bdd = bdd_call();
-  $req = $bdd->prepare('INSERT INTO accounts(nom, prenom, username, password, question, reponse) VALUES(:nom, :prenom, :username, :password, :question, :reponse)');
+  $req = $bdd->prepare(
+    'INSERT INTO accounts(nom, prenom, username, password, question, reponse) 
+      VALUES(:nom, :prenom, :username, :password, :question, :reponse)');
   return $req->execute(array(
       'nom' => $nom,
       'prenom' => $prenom,
