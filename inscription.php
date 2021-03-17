@@ -90,8 +90,8 @@
   <link rel="stylesheet" href="style.css">
   <title>inscription</title>
 </head>
-<?php include("header.php"); ?>
 <body>
+<?php include("header.php"); ?>
   <main>
     <div style="<?php echo "display:".$state_display ?>">
       <div class="container">
@@ -111,7 +111,6 @@
       <div class="card-option-column">
         <h3>Inscription</h3>
         <form action="inscription.php" method="post">
-          <p>
             <table>
               <tr>
                 <td><label for="prenom">prénom :</label> </td>
@@ -143,7 +142,6 @@
               </tr>
             </table>
             <input class="btn-option" type="submit"/>
-          </p>
         </form>
         <div class="link-bottom">
           <a href="index.php">déjà inscrit?</a>

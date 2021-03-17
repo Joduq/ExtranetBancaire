@@ -1,14 +1,14 @@
 <?php
 function bdd_call(){
-  // $servername = 'localhost';
-  // $dbname = 'extranet_bancaire';
-  // $username = 'root';
-  // $password = 'root';
-
   $servername = 'localhost';
-  $dbname = 'id16400252_extranet_bancaire';
-  $username = 'id16400252_jduquesnoy';
-  $password = '^(Qxud/yiFOt|wI9';
+  $dbname = 'extranet_bancaire';
+  $username = 'root';
+  $password = 'root';
+
+  // $servername = 'localhost';
+  // $dbname = 'id16400252_extranet_bancaire';
+  // $username = 'id16400252_jduquesnoy';
+  // $password = '^(Qxud/yiFOt|wI9';
 
 
 

@@ -85,7 +85,6 @@ if (!isset($_POST['password'])){
             <h3>Mot de passe oublié</h3>
             <p>Entrez votre username:</p>
             <form action="oublie.php" method="post">
-              <p>
                 <table>
                   <tr>
                     <td><label for="prenom">username:</label></td>
@@ -93,7 +92,6 @@ if (!isset($_POST['password'])){
                   </tr> 
                 </table>
                 <input class="btn-option" type="submit"/>
-              </p>
             </form>
           </div>
         </div> 
@@ -104,7 +102,6 @@ if (!isset($_POST['password'])){
           <h3>Mot de passe oublié</h3>          
           <p>question secrète: <?php echo htmlspecialchars($donnees['question']);?></p>
           <form action="oublie.php" method="post">
-            <p>
               <table>
                 <tr>
                   <td><label for="reponse">entrez la réponse:</label></td>
@@ -113,7 +110,6 @@ if (!isset($_POST['password'])){
               </table>  
               <input type="hidden" name="username" value="<?php echo $username ?>" />
               <input class="btn-option" type="submit"/>
-            </p>
           </form>
         </div>
       </div>
@@ -123,7 +119,6 @@ if (!isset($_POST['password'])){
         <div class="card-option-column">
         <h3>Mot de passe oublié</h3>     
           <form action="oublie.php" method="post">
-            <p>
               <table>
                 <tr>
                   <td><label for="password">nouveau mot de passe :</label></td>
@@ -136,7 +131,6 @@ if (!isset($_POST['password'])){
               </table> 
               <input type="hidden" name="username" value="<?php echo $username ?>" /> 
               <input class="btn-option" type="submit"/>
-            </p>
           </form>
         </div>
       </div>

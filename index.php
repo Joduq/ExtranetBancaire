@@ -78,7 +78,7 @@ if (!isset($_POST['username'])){
     <div class="container">
       <div class="card-option-column">
         <h2>CONNEXION</h2>
-        <form action='' method="post">
+        <form action='index.php' method="post">
           <table>
             <tr>
               <td><label for="username">username :</label> </td>
