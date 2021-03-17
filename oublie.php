@@ -87,7 +87,7 @@ if (!isset($_POST['password'])){
             <form action="oublie.php" method="post">
                 <table>
                   <tr>
-                    <td><label for="prenom">username:</label></td>
+                    <td><label for="username">username:</label></td>
                     <td><input type="text" name="username" id="username"/><br/></td>
                   </tr> 
                 </table>
