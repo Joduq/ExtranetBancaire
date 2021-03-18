@@ -1,14 +1,14 @@
 <?php
 function bdd_call(){
-  // $servername = 'localhost';
-  // $dbname = 'extranet_bancaire';
-  // $username = 'root';
-  // $password = 'root';
-
   $servername = 'localhost';
-  $dbname = 'id16400252_extranet_bancaire';
-  $username = 'id16400252_jduquesnoy';
-  $password = '^(Qxud/yiFOt|wI9';
+  $dbname = 'extranet_bancaire';
+  $username = 'root';
+  $password = 'root';
+
+  // $servername = 'localhost';
+  // $dbname = 'id16400252_extranet_bancaire';
+  // $username = 'id16400252_jduquesnoy';
+  // $password = '^(Qxud/yiFOt|wI9';
 
 
 
@@ -110,6 +110,15 @@ function comments_count($id_acteur){
   $bdd = bdd_call();
   $req = $bdd->prepare('SELECT COUNT(*) FROM posts WHERE id_acteur = :id_acteur');
   $req->execute(array('id_acteur' =>$id_acteur));
+  return $count = $req->fetchColumn();
+}
+
+function comments_count_user($id_acteur,$id_user){
+  $bdd = bdd_call();
+  $req = $bdd->prepare('SELECT COUNT(*) FROM posts WHERE id_acteur = :id_acteur AND id_user =:id_user');
+  $req->execute(array(
+                      'id_acteur' =>$id_acteur,
+                      'id_user' =>$id_user));
   return $count = $req->fetchColumn();
 }
 

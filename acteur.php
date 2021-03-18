@@ -17,6 +17,7 @@ $count_up = thumbs_count($id_acteur,1);
 $count_down = thumbs_count($id_acteur,0);
 $count_comments = comments_count($id_acteur);
 $array_of_comments = all_comments($id_acteur);
+$count_comments_user = comments_count_user($id_acteur,$_SESSION['id_user']);
 
 foreach($array_of_comments as $comment){
   $users = user_params($comment);
@@ -39,6 +40,7 @@ foreach($array_of_comments as $comment){
 <body>
 <?php include("header.php"); ?>
 <main>
+  <p><?php echo htmlspecialchars($count_comments_user);?></p>
   <div class="container">
     <div class="card-acteur-column">
       <div class="card-acteur-img-center">
@@ -56,7 +58,7 @@ foreach($array_of_comments as $comment){
       <div class="card-commentaire-infos">
         <h2> <?php echo htmlspecialchars($count_comments);?> commentaires</h2> 
         <div class="card-commentaire-input">
-          <div class="card-btn-commentaire"><button><a href="commentaires.php?id_acteur=<?php echo htmlspecialchars($_GET['id']);?>">nouveau commentaire</a></button>
+          <div class="card-btn-commentaire"><button><a <?php if ($count_comments_user>0){echo "style=pointer-events:none;";} ?> href="commentaires.php?id_acteur=<?php echo htmlspecialchars($_GET['id']);?>">nouveau commentaire</a></button>
           </div>
           <div class="card-commentaire-like">
             <div class="thumb-up">      
