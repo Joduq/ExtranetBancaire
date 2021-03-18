@@ -121,7 +121,7 @@
                 <td><input type="text" name="nom" id="nom" value="<?php if(isset($nom)){echo $nom;} ?>"/></td>
               </tr>
               <tr>
-                <td><label for="username">username :</label> </td>
+                <td><label for="username">pseudo :</label> </td>
                 <td><input type="text" name="username" id="username" value="<?php if(isset($username)){echo $username;} ?>"/></td>
               </tr>
               <tr>

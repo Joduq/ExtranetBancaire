@@ -81,7 +81,7 @@ if (!isset($_POST['username'])){
         <form action='index.php' method="post">
           <table>
             <tr>
-              <td><label for="username">username :</label> </td>
+              <td><label for="username">pseudo :</label> </td>
               <td><input type="text" name="username" id="username" value="<?php if(isset($username)){echo htmlspecialchars($username);} ?>"/></td>
             </tr>
             <tr>

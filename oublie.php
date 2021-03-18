@@ -83,11 +83,11 @@ if (!isset($_POST['password'])){
       <div class="container">
           <div class="card-option-column">          
             <h3>Mot de passe oublié</h3>
-            <p>Entrez votre username:</p>
+            <p>Entrez votre pseudo:</p>
             <form action="oublie.php" method="post">
                 <table>
                   <tr>
-                    <td><label for="username">username:</label></td>
+                    <td><label for="username">pseudo:</label></td>
                     <td><input type="text" name="username" id="username"/><br/></td>
                   </tr> 
                 </table>
