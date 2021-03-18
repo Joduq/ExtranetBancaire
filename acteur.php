@@ -40,7 +40,6 @@ foreach($array_of_comments as $comment){
 <body>
 <?php include("header.php"); ?>
 <main>
-  <p><?php echo htmlspecialchars($count_comments_user);?></p>
   <div class="container">
     <div class="card-acteur-column">
       <div class="card-acteur-img-center">

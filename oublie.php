@@ -18,7 +18,7 @@ $state_c = 'none';
 if (!isset($_POST['username'])){
 }else{
   if (!$donnees){
-    $array_of_errors[] = 'username inconnu';
+    $array_of_errors[] = 'pseudo inconnu';
     $state_display ='initial';
   }else{
     $state_a ='none';
